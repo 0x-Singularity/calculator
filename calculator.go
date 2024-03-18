@@ -7,7 +7,8 @@ import (
 )
 
 func add(a, b float64) float64 {
-	return a + b
+	//Implement add function
+  return a + b
 }
 
 func subtract(a, b float64) float64 {
