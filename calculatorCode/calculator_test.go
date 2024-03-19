@@ -5,7 +5,7 @@ import (
 )
 
 func TestAdd(t *testing.T) {
-	result := add(1, 2)
+	result := Add(1, 2)
 	expected := 3
 	if result != float64(expected) {
 		t.Errorf("Add(1, 2) = %f; want %d", result, expected)
@@ -13,7 +13,7 @@ func TestAdd(t *testing.T) {
 }
 
 func TestSubtract(t *testing.T) {
-	result := subtract(5, 2)
+	result := Subtract(5, 2)
 	expected := 3
 	if result != float64(expected) {
 		t.Errorf("Subtract(5, 2) = %f; want %d", result, expected)
@@ -21,7 +21,7 @@ func TestSubtract(t *testing.T) {
 }
 
 func TestMultiply(t *testing.T) {
-	result := multiply(3, 4)
+	result := Multiply(3, 4)
 	expected := 12
 	if result != float64(expected) {
 		t.Errorf("Multiply(3, 4) = %f; want %d", result, expected)
@@ -29,9 +29,20 @@ func TestMultiply(t *testing.T) {
 }
 
 func TestDivide(t *testing.T) {
-	result := divide(10, 2)
-	expected := 5
-	if result != float64(expected) {
-		t.Errorf("Divide(10, 2) = %f; want %d", result, expected)
+	result, err := Divide(10, 2)
+	expected := 5.0 // Use float64 since result is a float64
+	if result != expected {
+		t.Errorf("Divide(10, 2) = %f; want %f", result, expected)
 	}
+	if err != nil {
+		t.Errorf("Divide(10, 2) returned an error: %v", err)
+	}
+
+	// Test divide by zero
+	_, err = Divide(10, 0)
+	if err == nil {
+		t.Error("Divide(10, 0) should return an error")
+	}
+
+
 }
