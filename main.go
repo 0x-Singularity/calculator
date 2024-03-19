@@ -4,7 +4,7 @@ import (
   "fmt"
   "os"
   "strconv"
-  "github.com/0x-Singularity/calculator"
+  "github.com/0x-Singularity/calculator/calculatorCode"
 )
 
 func main() {
@@ -22,6 +22,7 @@ func main() {
     os.Exit(1)
   }
 
+  var err error
   var result float64
   switch operation {
   case "add":
@@ -31,7 +32,11 @@ func main() {
   case "multiply":
     result = calculator.Multiply(operand1, operand2)
   case "divide":
-    result = calculator.Divide(operand1, operand2)
+    result, err = calculator.Divide(operand1, operand2)
+   if err != nil {
+      fmt.Println("Error:", err.Error())
+      os.Exit(1)
+    }
   default:
     fmt.Println("Error: Invalid operation")
     os.Exit(1)
